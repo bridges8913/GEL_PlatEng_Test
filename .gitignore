@@ -1,3 +1,6 @@
 .terraform
 *.tfstate
 *.tfstate.backup
+tfplan
+strip_exif.zip
+.terraform.lock.hcl
