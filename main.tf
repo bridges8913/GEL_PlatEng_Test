@@ -95,7 +95,9 @@ resource "aws_iam_policy" "iam_policy_for_lambda" {
             "Action": "*",
         "Resource": [
             "${aws_s3_bucket.upload_bucket.arn}",
-            "${aws_s3_bucket.stripped_bucket.arn}"
+            "${aws_s3_bucket.upload_bucket.arn}/*",
+            "${aws_s3_bucket.stripped_bucket.arn}",
+            "${aws_s3_bucket.stripped_bucket.arn}/*"
         ],
         "Effect": "Allow"
         }
@@ -119,4 +121,5 @@ resource "aws_lambda_function" "strip_exif_lambda_func" {
     runtime         = "python3.8"
     layers          = ["arn:aws:lambda:eu-west-2:770693421928:layer:Klayers-p38-Pillow:5"]
     depends_on      = [aws_iam_role_policy_attachment.attach_iam_policy_to_iam_role]
+    timeout         = 30
 }
